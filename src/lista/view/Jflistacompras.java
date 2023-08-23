@@ -18,6 +18,7 @@ public class Jflistacompras extends javax.swing.JFrame {
      * Creates new form Jflistacompras
      */
     ArrayList<Listacomprasmodel> adicionaCompra = new ArrayList<Listacomprasmodel>();
+    DefaultTableModel model;
     public Jflistacompras() {
         initComponents();
     }
@@ -89,6 +90,11 @@ public class Jflistacompras extends javax.swing.JFrame {
         });
 
         InputApaga.setText("Apagar");
+        InputApaga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InputApagaActionPerformed(evt);
+            }
+        });
 
         Inputlimpa.setText("Limpar");
 
@@ -122,17 +128,18 @@ public class Jflistacompras extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(inputProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(inputAdiciona)
-                                .addGap(94, 94, 94)
-                                .addComponent(InputApaga)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Inputlimpa))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(35, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(inputAdiciona)
+                            .addGap(94, 94, 94)
+                            .addComponent(InputApaga)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Inputlimpa))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                            .addGap(22, 22, 22)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,15 +184,21 @@ public class Jflistacompras extends javax.swing.JFrame {
        lc = listacon.adicionaCompra(inputProduto.getSelectedItem().toString(), Integer.parseInt(inputUnidade.getText()));
        adicionaCompra.add(lc);
        
-       DefaultTableModel model = (DefaultTableModel) outputTabela.getModel();
+       model = (DefaultTableModel) outputTabela.getModel();
         model.setNumRows(0);
         String[] coluna  = {"",""};
         for(Listacomprasmodel lista:adicionaCompra){
             coluna[0] = String.valueOf(lista.getProduto());
             coluna[1] = String.valueOf(lista.getUnidade());
             model.addRow(coluna);
+            //chuva
         }
     }//GEN-LAST:event_inputAdicionaActionPerformed
+
+    private void InputApagaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputApagaActionPerformed
+           
+        model.removeRow(outputTabela.getSelectedRow());
+    }//GEN-LAST:event_InputApagaActionPerformed
 
     /**
      * @param args the command line arguments
