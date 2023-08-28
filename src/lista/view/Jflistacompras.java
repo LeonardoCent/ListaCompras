@@ -97,6 +97,11 @@ public class Jflistacompras extends javax.swing.JFrame {
         });
 
         Inputlimpa.setText("Limpar");
+        Inputlimpa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InputlimpaActionPerformed(evt);
+            }
+        });
 
         outputTabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -199,6 +204,10 @@ public class Jflistacompras extends javax.swing.JFrame {
            
         model.removeRow(outputTabela.getSelectedRow());
     }//GEN-LAST:event_InputApagaActionPerformed
+
+    private void InputlimpaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputlimpaActionPerformed
+        model.setNumRows(0);
+    }//GEN-LAST:event_InputlimpaActionPerformed
 
     /**
      * @param args the command line arguments
